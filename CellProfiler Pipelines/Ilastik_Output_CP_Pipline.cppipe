@@ -2,7 +2,7 @@ CellProfiler Pipeline: http://www.cellprofiler.org
 Version:5
 DateRevision:421
 GitHash:
-ModuleCount:13
+ModuleCount:14
 HasImagePlaneDetails:False
 
 Images:[module_num:1|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:['To begin creating your project, use the Images module to compile a list of files and/or folders that you want to analyze. You can also specify a set of rules to include only the desired files in your selected folders.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
@@ -28,23 +28,29 @@ Metadata:[module_num:2|svn_version:'Unknown'|variable_revision_number:6|show_win
     Does cached metadata exist?:No
 
 NamesAndTypes:[module_num:3|svn_version:'Unknown'|variable_revision_number:8|show_window:False|notes:['The NamesAndTypes module allows you to assign a meaningful name to each image by which other modules will refer to it.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
-    Assign a name to:All images
+    Assign a name to:Images matching rules
     Select the image type:Grayscale image
-    Name to assign these images:mono
+    Name to assign these images:DNA
     Match metadata:[]
     Image set matching method:Order
     Set intensity range from:Image metadata
-    Assignments count:1
+    Assignments count:2
     Single images count:0
     Maximum intensity:255.0
     Process as 3D?:No
     Relative pixel spacing in X:1.0
     Relative pixel spacing in Y:1.0
     Relative pixel spacing in Z:1.0
-    Select the rule criteria:and (file does contain "")
-    Name to assign these images:DNA
+    Select the rule criteria:and (directory does contain "original")
+    Name to assign these images:pahse
     Name to assign these objects:Cell
     Select the image type:Grayscale image
+    Set intensity range from:Image metadata
+    Maximum intensity:255.0
+    Select the rule criteria:and (directory does contain "Pixel")
+    Name to assign these images:Pixel Classification
+    Name to assign these objects:Nucleus
+    Select the image type:Color image
     Set intensity range from:Image metadata
     Maximum intensity:255.0
 
@@ -53,82 +59,73 @@ Groups:[module_num:4|svn_version:'Unknown'|variable_revision_number:2|show_windo
     grouping metadata count:1
     Metadata category:None
 
-CorrectIlluminationCalculate:[module_num:5|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
-    Select the input image:mono
-    Name the output image:IllumBlue
-    Select how the illumination function is calculated:Regular
-    Dilate objects in the final averaged image?:Yes
-    Dilation radius:1
-    Block size:60
-    Rescale the illumination function?:Yes
-    Calculate function for each image individually, or based on all images?:Each
-    Smoothing method:No smoothing
-    Method to calculate smoothing filter size:Automatic
-    Approximate object diameter:10
-    Smoothing filter size:10
-    Retain the averaged image?:No
-    Name the averaged image:IllumBlueAvg
-    Retain the dilated image?:No
-    Name the dilated image:IllumBlueDilated
-    Automatically calculate spline parameters?:Yes
-    Background mode:auto
-    Number of spline points:5
-    Background threshold:2.0
-    Image resampling factor:2.0
-    Maximum number of iterations:40
-    Residual value for convergence:0.001
+ColorToGray:[module_num:5|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:Pixel Classification
+    Conversion method:Split
+    Image type:RGB
+    Name the output image:OrigGray
+    Relative weight of the red channel:1.0
+    Relative weight of the green channel:1.0
+    Relative weight of the blue channel:1.0
+    Convert red to gray?:Yes
+    Name the output image:bacteriaSegmented
+    Convert green to gray?:No
+    Name the output image:OrigGreen
+    Convert blue to gray?:No
+    Name the output image:OrigBlue
+    Convert hue to gray?:Yes
+    Name the output image:OrigHue
+    Convert saturation to gray?:Yes
+    Name the output image:OrigSaturation
+    Convert value to gray?:Yes
+    Name the output image:OrigValue
+    Channel count:1
+    Channel number:1
+    Relative weight of the channel:1.0
+    Image name:Channel1
 
-CorrectIlluminationApply:[module_num:6|svn_version:'Unknown'|variable_revision_number:5|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
-    Select the input image:mono
-    Name the output image:CorrBlue
-    Select the illumination function:IllumBlue
-    Select how the illumination function is applied:Divide
-    Set output image values less than 0 equal to 0?:Yes
-    Set output image values greater than 1 equal to 1?:Yes
+EnhanceOrSuppressFeatures:[module_num:6|svn_version:'Unknown'|variable_revision_number:7|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:bacteriaSegmented
+    Name the output image:EnhanceOrSuppressFeatures
+    Select the operation:Enhance
+    Feature size:40
+    Feature type:Speckles
+    Range of hole sizes:1,10
+    Smoothing scale:2.0
+    Shear angle:0.0
+    Decay:0.95
+    Enhancement method:Tubeness
+    Speed and accuracy:Fast
+    Rescale result image:No
 
-Watershed:[module_num:7|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
-    Select the input image:CorrBlue
-    Name the output object:Watershed
-    Use advanced settings?:No
-    Generate from:Distance
-    Markers:None
-    Mask:Leave blank
-    Connectivity:1
-    Compactness:0.0
-    Footprint:2
-    Downsample:1
-    Separate watershed labels:No
-    Declump method:Shape
-    Reference Image:None
-    Segmentation distance transform smoothing factor:1.0
-    Minimum distance between seeds:1
-    Minimum absolute internal distance:0.0
-    Pixels from border to exclude:0
-    Maximum number of seeds:-1
-    Structuring element for seed dilation:Disk,1
-
-IdentifySecondaryObjects:[module_num:8|svn_version:'Unknown'|variable_revision_number:10|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
-    Select the input objects:Watershed
-    Name the objects to be identified:IdentifySecondaryObjects
-    Select the method to identify the secondary objects:Propagation
-    Select the input image:CorrBlue
-    Number of pixels by which to expand the primary objects:10
-    Regularization factor:0.05
-    Discard secondary objects touching the border of the image?:Yes
-    Discard the associated primary objects?:Yes
-    Name the new primary objects:FilteredNuclei
-    Fill holes in identified objects?:Yes
+IdentifyPrimaryObjects:[module_num:7|svn_version:'Unknown'|variable_revision_number:15|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:EnhanceOrSuppressFeatures
+    Name the primary objects to be identified:IdentifyPrimaryObjects
+    Typical diameter of objects, in pixel units (Min,Max):9,40
+    Discard objects outside the diameter range?:Yes
+    Discard objects touching the border of the image?:Yes
+    Method to distinguish clumped objects:Shape
+    Method to draw dividing lines between clumped objects:Shape
+    Size of smoothing filter:10
+    Suppress local maxima that are closer than this minimum allowed distance:40
+    Speed up by using lower-resolution image to find local maxima?:No
+    Fill holes in identified objects?:After both thresholding and declumping
+    Automatically calculate size of smoothing filter for declumping?:Yes
+    Automatically calculate minimum allowed distance between local maxima?:No
+    Handling of objects if excessive number of objects identified:Continue
+    Maximum number of objects:500
+    Use advanced settings?:Yes
     Threshold setting version:12
     Threshold strategy:Global
     Thresholding method:Otsu
-    Threshold smoothing scale:0.0
-    Threshold correction factor:1.0
-    Lower and upper bounds on threshold:0.0,1.0
+    Threshold smoothing scale:1
+    Threshold correction factor:1
+    Lower and upper bounds on threshold:0,1
     Manual threshold:0.0
     Select the measurement to threshold with:None
-    Two-class or three-class thresholding?:Two classes
+    Two-class or three-class thresholding?:Three classes
     Log transform before thresholding?:No
-    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Assign pixels in the middle intensity class to the foreground or the background?:Background
     Size of adaptive window:50
     Lower outlier fraction:0.05
     Upper outlier fraction:0.05
@@ -137,9 +134,9 @@ IdentifySecondaryObjects:[module_num:8|svn_version:'Unknown'|variable_revision_n
     # of deviations:2.0
     Thresholding method:Minimum Cross-Entropy
 
-TrackObjects:[module_num:9|svn_version:'Unknown'|variable_revision_number:7|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+TrackObjects:[module_num:8|svn_version:'Unknown'|variable_revision_number:7|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Choose a tracking method:Overlap
-    Select the objects to track:IdentifySecondaryObjects
+    Select the objects to track:IdentifyPrimaryObjects
     Select object measurement to use for tracking:None
     Maximum pixel distance to consider matches:50
     Select display option:Color and Number
@@ -168,16 +165,16 @@ TrackObjects:[module_num:9|svn_version:'Unknown'|variable_revision_number:7|show
     Cost of cell to empty matching:15.0
     Weight of area difference in function matching cost:25.0
 
-MeasureObjectSizeShape:[module_num:10|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
-    Select object sets to measure:IdentifySecondaryObjects
+MeasureObjectSizeShape:[module_num:9|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select object sets to measure:IdentifyPrimaryObjects
     Calculate the Zernike features?:No
     Calculate the advanced features?:No
 
-MeasureObjectNeighbors:[module_num:11|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
-    Select objects to measure:IdentifySecondaryObjects
-    Select neighboring objects to measure:IdentifySecondaryObjects
-    Method to determine neighbors:Expand until adjacent
-    Neighbor distance:5
+MeasureObjectNeighbors:[module_num:10|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select objects to measure:IdentifyPrimaryObjects
+    Select neighboring objects to measure:IdentifyPrimaryObjects
+    Method to determine neighbors:Within a specified distance
+    Neighbor distance:3
     Consider objects discarded for touching image border?:Yes
     Retain the image of objects colored by numbers of neighbors?:No
     Name the output image:ObjectNeighborCount
@@ -186,17 +183,37 @@ MeasureObjectNeighbors:[module_num:11|svn_version:'Unknown'|variable_revision_nu
     Name the output image:PercentTouching
     Select colormap:Oranges
 
-SaveImages:[module_num:12|svn_version:'Unknown'|variable_revision_number:16|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+ConvertObjectsToImage:[module_num:11|svn_version:'Unknown'|variable_revision_number:1|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input objects:IdentifyPrimaryObjects
+    Name the output image:CellImage
+    Select the color format:Color
+    Select the colormap:Default
+
+Tile:[module_num:12|svn_version:'Unknown'|variable_revision_number:1|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select an input image:pahse
+    Name the output image:Detected_objects
+    Tile assembly method:Within cycles
+    Final number of rows:1
+    Final number of columns:12
+    Image corner to begin tiling:top left
+    Direction to begin tiling:row
+    Use meander mode?:No
+    Automatically calculate number of rows?:No
+    Automatically calculate number of columns?:Yes
+    Select an additional image to tile:CellImage
+    Select an additional image to tile:TrackedCells
+
+SaveImages:[module_num:13|svn_version:'Unknown'|variable_revision_number:16|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Select the type of image to save:Image
-    Select the image to save:TrackedCells
-    Select method for constructing file names:Sequential numbers
-    Select image name for file prefix:None
-    Enter file prefix:monoObjects
+    Select the image to save:Detected_objects
+    Select method for constructing file names:From image filename
+    Select image name for file prefix:pahse
+    Enter single file name:TrackedCells
     Number of digits:4
     Append a suffix to the image file name?:No
     Text to append to the image name:
-    Saved file format:tiff
-    Output file location:Default Input Folder sub-folder|Documents\\GitHub\\article\\CellProfiler\\Mono Culture\\4. CP outputs\\tracking
+    Saved file format:png
+    Output file location:Default Input Folder sub-folder|Desktop\\K12_Scene2\\CP Output\\tracked Cells
     Image bit depth:8-bit integer
     Overwrite existing files without warning?:No
     When to save:Every cycle
@@ -206,7 +223,7 @@ SaveImages:[module_num:12|svn_version:'Unknown'|variable_revision_number:16|show
     How to save the series:T (Time)
     Save with lossless compression?:Yes
 
-ExportToSpreadsheet:[module_num:13|svn_version:'Unknown'|variable_revision_number:13|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+ExportToSpreadsheet:[module_num:14|svn_version:'Unknown'|variable_revision_number:13|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Select the column delimiter:Comma (",")
     Add image metadata columns to your object data file?:No
     Add image file and folder names to your object data file?:No
@@ -214,18 +231,22 @@ ExportToSpreadsheet:[module_num:13|svn_version:'Unknown'|variable_revision_numbe
     Calculate the per-image mean values for object measurements?:No
     Calculate the per-image median values for object measurements?:No
     Calculate the per-image standard deviation values for object measurements?:No
-    Output file location:Default Input Folder sub-folder|Documents\\GitHub\\article\\CellProfiler\\Mono Culture\\4. CP outputs
+    Output file location:Default Input Folder sub-folder|Desktop\\K12_Scene2\\CP Output
     Create a GenePattern GCT file?:No
     Select source of sample row name:Metadata
     Select the image to use as the identifier:None
     Select the metadata to use as the identifier:None
-    Export all measurement types?:Yes
+    Export all measurement types?:No
     Press button to select measurements:
     Representation of Nan/Inf:NaN
-    Add a prefix to file names?:Yes
+    Add a prefix to file names?:No
     Filename prefix:MyExpt_
     Overwrite existing files without warning?:No
-    Data to export:Do not use
+    Data to export:Object relationships
+    Combine these object measurements with those of the previous object?:No
+    File name:DATA.csv
+    Use the object name for the file name?:Yes
+    Data to export:IdentifyPrimaryObjects
     Combine these object measurements with those of the previous object?:No
     File name:DATA.csv
     Use the object name for the file name?:Yes
