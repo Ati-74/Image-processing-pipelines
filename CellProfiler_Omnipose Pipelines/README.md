@@ -1,6 +1,6 @@
 
 
-1. Verify and Install Python
+1. Verify and Install Python</br>
    a. Check Your Python Version
 
      Open a terminal:
@@ -12,9 +12,12 @@ python --version
 ```
 (On some systems, use `python3 --version`.)
 
-   b. Ensure Compatibility</br>
-CellProfiler-Omnipose is compatible only with Python 3.8 and Python 3.9.</br>
-If your Python version is below 3.8, above 3.9, or not installed, proceed with the installation steps below.</br>
+   b. Ensure Compatibility
+   
+CellProfiler-Omnipose is compatible only with Python 3.8 and Python 3.9.
+
+If your Python version is below 3.8, above 3.9, or not installed, proceed with the installation steps below.
+
    c. Install Python
       - For Windows:
       Download the required version from the official Python website:
