@@ -2,9 +2,10 @@
 
 1. Verify and Install Python
    a. Check Your Python Version
+
      Open a terminal:
-     - On Windows: Launch the Command Prompt (CMD) by pressing Win + R, typing cmd, and pressing Enter.
-     - On Ubuntu: Open a terminal by pressing Ctrl + Alt + T.
+     - On Windows: Launch the Command Prompt (CMD) by pressing `Win + R`, typing `cmd`, and pressing Enter.
+     - On Ubuntu: Open a terminal by pressing `Ctrl + Alt + T`.
      Run the following command to check the installed Python version:
 ```
 python --version
