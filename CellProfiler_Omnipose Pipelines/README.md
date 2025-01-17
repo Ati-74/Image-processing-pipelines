@@ -29,3 +29,25 @@ If Python is detected as python3, create an alias to make it accessible as pytho
 alias python=python3
 ```
 
+## Step 3: Install Dependencies
+- Windows:
+  -  Microsoft Visual C++ Redistributable: Download and install from Microsoft's official website.
+  -  Microsoft Visual Studio C++ Build Tools: Download from Visual Studio website. During installation, select <b>Desktop development with C++</b>.
+  -  Java JDK 11: Download Java JDK 11 from Oracle's website. During installation, check the box labeled Set <b>JAVA_HOME variable </b>.
+    Verify installation:
+```
+java -version
+```
+
+-  Ubuntu:
+  -  Build Essentials: Install essential development tools, including GCC:
+```
+sudo apt update
+sudo apt install build-essential
+```
+  -  Java JDK 11: Install Java using the following commands:
+```
+sudo apt update
+sudo apt install openjdk-11-jdk
+java -version
+```
