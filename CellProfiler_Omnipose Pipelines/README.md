@@ -1,42 +1,31 @@
+# Installation Guide for CellProfiler and Plugins
+This guide walks you through installing CellProfiler and its plugins. Adjust the instructions as needed for your operating system (Windows or Ubuntu).
 
+## Step 1: Set Up a Conda Environment (Optional but Recommended)
+Creating a Conda environment ensures an isolated setup for CellProfiler, avoiding potential conflicts with other software. Use the following commands:
 
-1. Verify and Install Python</br>
-   a. Check Your Python Version
+```
+conda create -n cellprofiler python=3.9
+conda activate cellprofiler
+```
 
-     Open a terminal:
-     - On Windows: Launch the Command Prompt (CMD) by pressing `Win + R`, typing `cmd`, and pressing Enter.
-     - On Ubuntu: Open a terminal by pressing `Ctrl + Alt + T`.
-     Run the following command to check the installed Python version:
+If you prefer not to use a Conda environment, proceed to Step 2: Verify Python Version.
+
+## Step 2: Verify Python Version (For Non-Conda Users)
+If you are not creating a Conda environment, verify that the Python version on your system is 3.8 or higher. This guide has been tested with Python 3.8 and 3.9.
+
+- <b>Windows</b>: Ensure Python is added to the system's PATH during installation. If not, add Python to PATH.
+- <b>Ubuntu</b>: Check if Python is already installed:
 ```
 python --version
 ```
-(On some systems, use `python3 --version`.)
+or
+```
+python3 --version
+```
+If Python is detected as python3, create an alias to make it accessible as python:
 
-   b. Ensure Compatibility
-   
-CellProfiler-Omnipose is compatible only with Python 3.8 and Python 3.9.
+```
+alias python=python3
+```
 
-If your Python version is below 3.8, above 3.9, or not installed, proceed with the installation steps below.
-
-   c. Install Python
-      - For Windows:
-      Download the required version from the official Python website:
-      Download <a href="https://www.python.org/downloads/release/python-380/">Python 3.8</a></br>
-      Download <a href="https://www.python.org/downloads/release/python-390/">Python 3.9</a>
-Run the installer and select Windows x86-64 executable installer.
-During the installation, ensure you check the box for Add Python to PATH (<b>add to PATH</b>) before clicking Install.
-      - For Ubuntu:
-
-Update your package list:
-```
-sudo apt update
-```
-Install the desired Python version:
-For Python 3.8:
-```
-sudo apt install python3.8
-```
-For Python 3.9:
-```
-sudo apt install python3.9
-```
