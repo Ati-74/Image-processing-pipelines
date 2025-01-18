@@ -74,9 +74,11 @@ Variable Value: Full path to the JDK directory (e.g., C:\Program Files\Eclipse A
 Locate the JAVA_HOME Path:
 </br>
 Run the following command to list all Java installations:
+
 ```
 sudo update-alternatives --config java
 ```
+
 Note the path to the selected JDK directory (e.g., /usr/lib/jvm/java-11-openjdk-amd64).
 </br>
 Define the JDK_HOME Variable: </br>
