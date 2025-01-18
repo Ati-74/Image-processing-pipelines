@@ -40,8 +40,7 @@ java -version
 ```
 
 -  Ubuntu:
-   -  Build Essentials: Install essential development tools, including GCC:
-```
+   -  Build Essentials: Install essential development tools, including GCC:```
 sudo apt update
 sudo apt install build-essential
 ```
