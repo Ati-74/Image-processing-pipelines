@@ -45,6 +45,7 @@ java -version
 sudo apt update
 sudo apt install build-essential
 ```
+
    -  Java JDK 11: Install Java using the following commands:
 ```
 sudo apt update
