@@ -50,7 +50,7 @@ java -version
 ```
 
 ## Step 4: Find and Configure JAVA_HOME and JDK_HOME
-To ensure proper Java configuration, locate the JAVA_HOME directory (defined during Java installation) and define a new variable, JDK_HOME, with the same value.
+To ensure proper Java configuration, locate the <b>JAVA_HOME</b> directory (defined during Java installation) and define a new variable, <b>JDK_HOME</b>, with the same value.
 
 - Windows
 Check if JAVA_HOME is Defined: </br>Open Command Prompt and run:
