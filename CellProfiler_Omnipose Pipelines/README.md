@@ -48,3 +48,52 @@ sudo apt install build-essential
 sudo apt install openjdk-11-jdk
 java -version
 ```
+
+## Step 4: Find and Configure JAVA_HOME and JDK_HOME
+To ensure proper Java configuration, locate the JAVA_HOME directory (defined during Java installation) and define a new variable, JDK_HOME, with the same value.
+
+- Windows
+Check if JAVA_HOME is Defined: </br>Open Command Prompt and run:
+```
+echo %JAVA_HOME%
+```
+If this command outputs a valid directory path (e.g., C:\Program Files\Eclipse Adoptium\jdk-11.0.x), proceed to the next step. If not, manually locate the Java installation directory:</br>
+Navigate to the folder where Java was installed (default: C:\Program Files\Eclipse Adoptium or similar).
+</br>
+Define the JDK_HOME Variable:
+```
+Right-click This PC > Properties > Advanced System Settings > Environment Variables.
+Under System Variables, click New and create the variable:
+Variable Name: JDK_HOME
+Variable Value: Full path to the JDK directory (e.g., C:\Program Files\Eclipse Adoptium\jdk-11.0.21.9-hotspot).
+```
+
+<b>Note:</b> Ensure no conflicting Java paths (e.g., older Java versions, MinGW, or Cygwin64) exist in the PATH.
+
+- Ubuntu
+Locate the JAVA_HOME Path:
+</br>
+Run the following command to list all Java installations:
+```
+sudo update-alternatives --config java
+```
+Note the path to the selected JDK directory (e.g., /usr/lib/jvm/java-11-openjdk-amd64).
+</br>
+Define the JDK_HOME Variable: </br>
+Open your shell configuration file (e.g., ~/.bashrc) and add the following lines:
+```
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+export JDK_HOME=$JAVA_HOME
+export PATH=$PATH:$JAVA_HOME/bin
+```
+Save the file and reload the shell configuration:
+```
+source ~/.bashrc
+```
+Verify the Variables: </br>
+Confirm that both JAVA_HOME and JDK_HOME are set correctly:
+```
+echo $JAVA_HOME
+echo $JDK_HOME
+```
+
