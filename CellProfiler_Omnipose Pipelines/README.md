@@ -81,12 +81,15 @@ Note the path to the selected JDK directory (e.g., /usr/lib/jvm/java-11-openjdk-
 </br>
 Define the JDK_HOME Variable: </br>
 Open your shell configuration file (e.g., ~/.bashrc) and add the following lines:
+
 ```
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 export JDK_HOME=$JAVA_HOME
 export PATH=$PATH:$JAVA_HOME/bin
 ```
+
 Save the file and reload the shell configuration:
+
 ```
 source ~/.bashrc
 ```
