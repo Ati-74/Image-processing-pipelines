@@ -31,9 +31,9 @@ alias python=python3
 
 ## Step 3: Install Dependencies
 - Windows:
-  -  Microsoft Visual C++ Redistributable: Download and install from Microsoft's official website.
-  -  Microsoft Visual Studio C++ Build Tools: Download from Visual Studio website. During installation, select <b>Desktop development with C++</b>.
-  -  Java JDK 11: Download Java JDK 11 from Oracle's website. During installation, check the box labeled Set <b>JAVA_HOME variable </b>.
+  -  Microsoft Visual C++ Redistributable: Download and install from <a href='https://aka.ms/vs/17/release/vc_redist.x64.exe'> Microsoft's official website</a>.
+  -  Microsoft Visual Studio C++ Build Tools: Download from <a href='https://aka.ms/vs/17/release/vs_BuildTools.exe'>Microsoft's official website</a>. During installation, select <b>Desktop development with C++</b>.
+  -  Java JDK 11: Download Java JDK 11 from <a href='https://adoptium.net/temurin/archive/?version=11'>Oracle's website</a>. During installation, check the box labeled Set <b>JAVA_HOME variable </b>.
     Verify installation:
 ```
 java -version
