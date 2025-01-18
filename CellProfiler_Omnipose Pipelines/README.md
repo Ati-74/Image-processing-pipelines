@@ -106,7 +106,7 @@ echo $JDK_HOME
 Install Java Bridge:
 
 ```
-pip install python-javabridge==4.0.3
+pip install python-javabridge
 ```
 
 Install MySQL Client:
@@ -115,7 +115,7 @@ Install MySQL Client:
 pip install mysqlclient
 ```
 
-If errors occur, download the .whl file from <a href='https://pypi.org/project/mysqlclient/#files'>PyPI</a> and install it manually:
+If errors occur, download the `.whl` file from <a href='https://pypi.org/project/mysqlclient/#files'>PyPI</a> and install it manually:
 
 ```
 pip install mysqlclient-XXX.whl
