@@ -67,7 +67,7 @@ Under System Variables, click New and create the variable:
 Variable Name: JDK_HOME
 Variable Value: Full path to the JDK directory (e.g., C:\Program Files\Eclipse Adoptium\jdk-11.0.21.9-hotspot).
 ```
-
+Adding the JRE Path to the System PATH
 <b>Note:</b> Ensure no conflicting Java paths (e.g., older Java versions, MinGW, or Cygwin64) exist in the PATH.
 
 - Ubuntu
