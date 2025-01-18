@@ -102,3 +102,60 @@ echo $JAVA_HOME
 echo $JDK_HOME
 ```
 
+## Step 5: Install Required Python Packages
+Install Java Bridge:
+
+```
+pip install python-javabridge==4.0.3
+```
+
+Install MySQL Client:
+
+```
+pip install mysqlclient
+```
+
+If errors occur, download the .whl file from <a href='https://pypi.org/project/mysqlclient/#files'>PyPI</a> and install it manually:
+
+```
+pip install mysqlclient-XXX.whl
+```
+
+
+## Step 6: Install CellProfiler and Plugins
+- Install CellProfiler:
+Download the source code from <a href='https://github.com/CellProfiler/CellProfiler'>GitHub Releases</a>.
+Extract the files, navigate to the folder in the terminal, and install:
+
+```
+pip install -e .
+```
+
+- Install Plugins:
+Clone the plugin repository:
+```
+git clone https://github.com/CellProfiler/CellProfiler-plugins.git
+```
+
+Navigate to the plugin folder and install:
+```
+pip install -e .
+```
+
+## Step 7: Additional Package Installation
+Install the following packages:
+```
+pip install cellpose
+pip install omnipose
+pip install stardist
+```
+
+## Step 8: Configure CellProfiler Plugins
+Open CellProfiler:
+```
+cellprofiler
+```
+
+Set Plugin Directory: Navigate to `File > Preferences`.</br>
+In the CellProfiler plugins directory field, enter the path to the `active_plugins` folder in the plugins directory.
+Save and restart CellProfiler.
