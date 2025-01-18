@@ -40,12 +40,12 @@ java -version
 ```
 
 -  Ubuntu:
-  -  Build Essentials: Install essential development tools, including GCC:
+   -  Build Essentials: Install essential development tools, including GCC:
 ```
 sudo apt update
 sudo apt install build-essential
 ```
-  -  Java JDK 11: Install Java using the following commands:
+   -  Java JDK 11: Install Java using the following commands:
 ```
 sudo apt update
 sudo apt install openjdk-11-jdk
