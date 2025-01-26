@@ -55,11 +55,21 @@ sudo apt install openjdk-11-jdk
 java -version
 ```
 
+-  Mac:
+   -  Xcode Command Line Tools: Install essential development tools, including GCC.
+   -  Java JDK 11
+```
+xcode-select --install
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install openjdk@11
+java -version
+```
+
 ## Step 4: Find and Configure JAVA_HOME and JDK_HOME
 To ensure proper Java configuration, locate the <b>JAVA_HOME</b> directory (defined during Java installation) and define a new variable, <b>JDK_HOME</b>, with the same value.
 
 - Windows
-Check if JAVA_HOME is Defined: </br>Open Command Prompt and run:
+Check if `JAVA_HOME` is Defined: </br>Open Command Prompt and run:
 ```
 echo %JAVA_HOME%
 ```
@@ -77,7 +87,7 @@ Add JRE Path to the System PATH. </br>
 <b>Note:</b> Ensure no conflicting Java paths (e.g., older Java versions, MinGW, or Cygwin64) exist in the PATH.
 
 - Ubuntu
-Locate the JAVA_HOME Path:
+Locate the `JAVA_HOME` Path:
 </br>
 Run the following command to list all Java installations:
 
@@ -103,6 +113,35 @@ source ~/.bashrc
 ```
 Verify the Variables: </br>
 Confirm that both JAVA_HOME and JDK_HOME are set correctly:
+```
+echo $JAVA_HOME
+echo $JDK_HOME
+```
+
+- Mac
+Locate the `JAVA_HOME` path:
+```
+/usr/libexec/java_home -v 11
+```
+This outputs the JDK path (e.g., /Library/Java/JavaVirtualMachines/jdk-11.0.x.jdk/Contents/Home).
+
+Define `JAVA_HOME` and `JDK_HOME`: 
+
+Add the following lines to `~/.zshrc` or `~/.bashrc`:
+
+```
+export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+export JDK_HOME=$JAVA_HOME
+export PATH=$JAVA_HOME/bin:$PATH
+```
+
+Reload the shell configuration:
+```
+source ~/.zshrc  # or source ~/.bashrc
+```
+
+Verify:
+
 ```
 echo $JAVA_HOME
 echo $JDK_HOME
