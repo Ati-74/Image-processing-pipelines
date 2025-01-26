@@ -75,7 +75,8 @@ echo %JAVA_HOME%
 ```
 If this command outputs a valid directory path (e.g., C:\Program Files\Eclipse Adoptium\jdk-11.0.x), proceed to the next step. If not, manually locate the Java installation directory:</br>
 Navigate to the folder where Java was installed (default: C:\Program Files\Eclipse Adoptium or similar).
-</br>
+
+
 2. Define the JDK_HOME Variable:
 ```
 Right-click This PC > Properties > Advanced System Settings > Environment Variables.
