@@ -97,7 +97,8 @@ sudo update-alternatives --config java
 ```
 
 Note the path to the selected JDK directory (e.g., /usr/lib/jvm/java-11-openjdk-amd64).
-</br>
+
+
 2. Define the `JDK_HOME` Variable: </br>
 Open your shell configuration file (e.g., `~/.bashrc`) and add the following lines:
 
@@ -112,8 +113,10 @@ Save the file and reload the shell configuration:
 ```
 source ~/.bashrc
 ```
-Verify the Variables: </br>
-3. Confirm that both JAVA_HOME and JDK_HOME are set correctly:
+
+3. Verify the Variables:
+
+Confirm that both JAVA_HOME and JDK_HOME are set correctly:
 ```
 echo $JAVA_HOME
 echo $JDK_HOME
