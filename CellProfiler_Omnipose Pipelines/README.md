@@ -69,25 +69,25 @@ java -version
 To ensure proper Java configuration, locate the <b>JAVA_HOME</b> directory (defined during Java installation) and define a new variable, <b>JDK_HOME</b>, with the same value.
 
 - Windows
-Check if `JAVA_HOME` is Defined: </br>Open Command Prompt and run:
+1. Check if `JAVA_HOME` is Defined: </br>Open Command Prompt and run:
 ```
 echo %JAVA_HOME%
 ```
 If this command outputs a valid directory path (e.g., C:\Program Files\Eclipse Adoptium\jdk-11.0.x), proceed to the next step. If not, manually locate the Java installation directory:</br>
 Navigate to the folder where Java was installed (default: C:\Program Files\Eclipse Adoptium or similar).
 </br>
-Define the JDK_HOME Variable:
+2. Define the JDK_HOME Variable:
 ```
 Right-click This PC > Properties > Advanced System Settings > Environment Variables.
 Under System Variables, click New and create the variable:
 Variable Name: JDK_HOME
 Variable Value: Full path to the JDK directory (e.g., C:\Program Files\Eclipse Adoptium\jdk-11.0.21.9-hotspot).
 ```
-Add JRE Path to the System PATH. </br>
+3. Add JRE Path to the System PATH. </br>
 <b>Note:</b> Ensure no conflicting Java paths (e.g., older Java versions, MinGW, or Cygwin64) exist in the PATH.
 
 - Ubuntu
-Locate the `JAVA_HOME` Path:
+1. Locate the `JAVA_HOME` Path:
 </br>
 Run the following command to list all Java installations:
 
@@ -97,8 +97,8 @@ sudo update-alternatives --config java
 
 Note the path to the selected JDK directory (e.g., /usr/lib/jvm/java-11-openjdk-amd64).
 </br>
-Define the JDK_HOME Variable: </br>
-Open your shell configuration file (e.g., ~/.bashrc) and add the following lines:
+2. Define the `JDK_HOME` Variable: </br>
+Open your shell configuration file (e.g., `~/.bashrc`) and add the following lines:
 
 ```
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
@@ -112,20 +112,20 @@ Save the file and reload the shell configuration:
 source ~/.bashrc
 ```
 Verify the Variables: </br>
-Confirm that both JAVA_HOME and JDK_HOME are set correctly:
+3. Confirm that both JAVA_HOME and JDK_HOME are set correctly:
 ```
 echo $JAVA_HOME
 echo $JDK_HOME
 ```
 
 - Mac
-Locate the `JAVA_HOME` path:
+1. Locate the `JAVA_HOME` path:
 ```
 /usr/libexec/java_home -v 11
 ```
 This outputs the JDK path (e.g., /Library/Java/JavaVirtualMachines/jdk-11.0.x.jdk/Contents/Home).
 
-Define `JAVA_HOME` and `JDK_HOME`: 
+2. Define `JAVA_HOME` and `JDK_HOME`: 
 
 Add the following lines to `~/.zshrc` or `~/.bashrc`:
 
@@ -135,12 +135,12 @@ export JDK_HOME=$JAVA_HOME
 export PATH=$JAVA_HOME/bin:$PATH
 ```
 
-Reload the shell configuration:
+3. Reload the shell configuration:
 ```
 source ~/.zshrc  # or source ~/.bashrc
 ```
 
-Verify:
+4. Verify:
 
 ```
 echo $JAVA_HOME
