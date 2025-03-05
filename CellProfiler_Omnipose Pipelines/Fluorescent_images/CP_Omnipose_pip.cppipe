@@ -2,7 +2,7 @@ CellProfiler Pipeline: http://www.cellprofiler.org
 Version:5
 DateRevision:426
 GitHash:
-ModuleCount:20
+ModuleCount:18
 HasImagePlaneDetails:False
 
 Images:[module_num:1|svn_version:'Unknown'|variable_revision_number:2|show_window:False|notes:['To begin creating your project, use the Images module to compile a list of files and/or folders that you want to analyze. You can also specify a set of rules to include only the desired files in your selected folders.']|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
@@ -41,10 +41,10 @@ NamesAndTypes:[module_num:3|svn_version:'Unknown'|variable_revision_number:8|sho
     Relative pixel spacing in X:1.0
     Relative pixel spacing in Y:1.0
     Relative pixel spacing in Z:1.0
-    Select the rule criteria:and (directory does contain "color image")
-    Name to assign these images:bac_color_img
+    Select the rule criteria:and (directory does contain "Phase")
+    Name to assign these images:phase
     Name to assign these objects:Cell
-    Select the image type:Color image
+    Select the image type:Grayscale image
     Set intensity range from:Image metadata
     Maximum intensity:255.0
     Select the rule criteria:and (directory does contain "YFP")
@@ -65,33 +65,8 @@ Groups:[module_num:4|svn_version:'Unknown'|variable_revision_number:2|show_windo
     grouping metadata count:1
     Metadata category:None
 
-ColorToGray:[module_num:5|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
-    Select the input image:bac_color_img
-    Conversion method:Combine
-    Image type:RGB
-    Name the output image:OrigGray
-    Relative weight of the red channel:1.0
-    Relative weight of the green channel:1.0
-    Relative weight of the blue channel:1.0
-    Convert red to gray?:Yes
-    Name the output image:OrigRed
-    Convert green to gray?:Yes
-    Name the output image:OrigGreen
-    Convert blue to gray?:Yes
-    Name the output image:OrigBlue
-    Convert hue to gray?:Yes
-    Name the output image:OrigHue
-    Convert saturation to gray?:Yes
-    Name the output image:OrigSaturation
-    Convert value to gray?:Yes
-    Name the output image:OrigValue
-    Channel count:1
-    Channel number:1
-    Relative weight of the channel:1.0
-    Image name:Channel1
-
-RunOmnipose:[module_num:6|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
-    Select the input image:OrigGray
+RunOmnipose:[module_num:5|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:phase
     Expected object diameter:30
     Model:bact_phase_omni
     Name the output object:RunOmnipose
@@ -116,7 +91,7 @@ RunOmnipose:[module_num:6|svn_version:'Unknown'|variable_revision_number:3|show_
     verbose:Yes
     tile:Yes
 
-FilterObjects:[module_num:7|svn_version:'Unknown'|variable_revision_number:10|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+FilterObjects:[module_num:6|svn_version:'Unknown'|variable_revision_number:10|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Select the objects to filter:RunOmnipose
     Name the output objects:FilterObjects
     Select the filtering mode:Image or mask border
@@ -137,7 +112,7 @@ FilterObjects:[module_num:7|svn_version:'Unknown'|variable_revision_number:10|sh
     Maximum value:1.0
     Allow fuzzy feature matching?:No
 
-TrackObjects:[module_num:8|svn_version:'Unknown'|variable_revision_number:7|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+TrackObjects:[module_num:7|svn_version:'Unknown'|variable_revision_number:7|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Choose a tracking method:Overlap
     Select the objects to track:FilterObjects
     Select object measurement to use for tracking:None
@@ -168,12 +143,12 @@ TrackObjects:[module_num:8|svn_version:'Unknown'|variable_revision_number:7|show
     Cost of cell to empty matching:15.0
     Weight of area difference in function matching cost:25.0
 
-MeasureObjectSizeShape:[module_num:9|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+MeasureObjectSizeShape:[module_num:8|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Select object sets to measure:FilterObjects
     Calculate the Zernike features?:No
     Calculate the advanced features?:Yes
 
-MeasureObjectNeighbors:[module_num:10|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+MeasureObjectNeighbors:[module_num:9|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Select objects to measure:FilterObjects
     Select neighboring objects to measure:FilterObjects
     Method to determine neighbors:Expand until adjacent
@@ -186,37 +161,24 @@ MeasureObjectNeighbors:[module_num:10|svn_version:'Unknown'|variable_revision_nu
     Name the output image:PercentTouching
     Select colormap:Oranges
 
-MeasureObjectIntensity:[module_num:11|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+MeasureObjectIntensity:[module_num:10|svn_version:'Unknown'|variable_revision_number:4|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Select images to measure:RFP, YFP
     Select objects to measure:FilterObjects
 
-ConvertObjectsToImage:[module_num:12|svn_version:'Unknown'|variable_revision_number:1|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+ConvertObjectsToImage:[module_num:11|svn_version:'Unknown'|variable_revision_number:1|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Select the input objects:FilterObjects
     Name the output image:CellImage_rgb
     Select the color format:Color
     Select the colormap:Default
 
-ConvertObjectsToImage:[module_num:13|svn_version:'Unknown'|variable_revision_number:1|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+ConvertObjectsToImage:[module_num:12|svn_version:'Unknown'|variable_revision_number:1|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Select the input objects:FilterObjects
     Name the output image:CellImage_bw
     Select the color format:Binary (black & white)
     Select the colormap:Default
 
-MeasureObjectNeighbors:[module_num:14|svn_version:'Unknown'|variable_revision_number:3|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
-    Select objects to measure:FilterObjects
-    Select neighboring objects to measure:FilterObjects
-    Method to determine neighbors:Expand until adjacent
-    Neighbor distance:5
-    Consider objects discarded for touching image border?:Yes
-    Retain the image of objects colored by numbers of neighbors?:No
-    Name the output image:ObjectNeighborCount
-    Select colormap:Blues
-    Retain the image of objects colored by percent of touching pixels?:No
-    Name the output image:PercentTouching
-    Select colormap:Oranges
-
-Tile:[module_num:15|svn_version:'Unknown'|variable_revision_number:1|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
-    Select an input image:bac_color_img
+Tile:[module_num:13|svn_version:'Unknown'|variable_revision_number:1|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select an input image:phase
     Name the output image:TiledImage
     Tile assembly method:Within cycles
     Final number of rows:1
@@ -229,17 +191,57 @@ Tile:[module_num:15|svn_version:'Unknown'|variable_revision_number:1|show_window
     Select an additional image to tile:CellImage_rgb
     Select an additional image to tile:TrackedCells
 
-SaveImages:[module_num:16|svn_version:'Unknown'|variable_revision_number:16|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+SaveImages:[module_num:14|svn_version:'Unknown'|variable_revision_number:16|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Select the type of image to save:Image
     Select the image to save:TiledImage
     Select method for constructing file names:From image filename
-    Select image name for file prefix:bac_color_img
+    Select image name for file prefix:phase
     Enter single file name:OrigBlue
     Number of digits:4
     Append a suffix to the image file name?:No
     Text to append to the image name:
     Saved file format:png
-    Output file location:Default Input Folder sub-folder|Documents/test/tracked_cells
+    Output file location:Default Input Folder sub-folder|Desktop/Image-processing-pipelines/CellProfiler_Omnipose Pipelines/Fluorescent_images/CP output/tracked_cells
+    Image bit depth:8-bit integer
+    Overwrite existing files without warning?:No
+    When to save:Every cycle
+    Record the file and path information to the saved image?:No
+    Create subfolders in the output folder?:No
+    Base image folder:Elsewhere...|
+    How to save the series:T (Time)
+    Save with lossless compression?:Yes
+
+SaveImages:[module_num:15|svn_version:'Unknown'|variable_revision_number:16|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the type of image to save:Image
+    Select the image to save:CellImage_bw
+    Select method for constructing file names:From image filename
+    Select image name for file prefix:phase
+    Enter single file name:OrigBlue
+    Number of digits:4
+    Append a suffix to the image file name?:No
+    Text to append to the image name:
+    Saved file format:tiff
+    Output file location:Default Input Folder sub-folder|Desktop/Image-processing-pipelines/CellProfiler_Omnipose Pipelines/Fluorescent_images/CP output/objects
+    Image bit depth:8-bit integer
+    Overwrite existing files without warning?:No
+    When to save:Every cycle
+    Record the file and path information to the saved image?:No
+    Create subfolders in the output folder?:No
+    Base image folder:Elsewhere...|
+    How to save the series:T (Time)
+    Save with lossless compression?:No
+
+SaveImages:[module_num:16|svn_version:'Unknown'|variable_revision_number:16|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the type of image to save:Image
+    Select the image to save:CellImage_rgb
+    Select method for constructing file names:From image filename
+    Select image name for file prefix:phase
+    Enter single file name:OrigBlue
+    Number of digits:4
+    Append a suffix to the image file name?:No
+    Text to append to the image name:
+    Saved file format:npy
+    Output file location:Default Input Folder sub-folder|Desktop/Image-processing-pipelines/CellProfiler_Omnipose Pipelines/Fluorescent_images/CP output/objects
     Image bit depth:8-bit integer
     Overwrite existing files without warning?:No
     When to save:Every cycle
@@ -251,55 +253,15 @@ SaveImages:[module_num:16|svn_version:'Unknown'|variable_revision_number:16|show
 
 SaveImages:[module_num:17|svn_version:'Unknown'|variable_revision_number:16|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Select the type of image to save:Image
-    Select the image to save:CellImage_bw
-    Select method for constructing file names:From image filename
-    Select image name for file prefix:bac_color_img
-    Enter single file name:OrigBlue
-    Number of digits:4
-    Append a suffix to the image file name?:No
-    Text to append to the image name:
-    Saved file format:tiff
-    Output file location:Default Input Folder sub-folder|Documents/test/objects
-    Image bit depth:8-bit integer
-    Overwrite existing files without warning?:No
-    When to save:Every cycle
-    Record the file and path information to the saved image?:No
-    Create subfolders in the output folder?:No
-    Base image folder:Elsewhere...|
-    How to save the series:T (Time)
-    Save with lossless compression?:No
-
-SaveImages:[module_num:18|svn_version:'Unknown'|variable_revision_number:16|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
-    Select the type of image to save:Image
-    Select the image to save:CellImage_rgb
-    Select method for constructing file names:From image filename
-    Select image name for file prefix:bac_color_img
-    Enter single file name:OrigBlue
-    Number of digits:4
-    Append a suffix to the image file name?:No
-    Text to append to the image name:
-    Saved file format:npy
-    Output file location:Default Input Folder sub-folder|Documents/test/objects
-    Image bit depth:8-bit integer
-    Overwrite existing files without warning?:No
-    When to save:Every cycle
-    Record the file and path information to the saved image?:No
-    Create subfolders in the output folder?:No
-    Base image folder:Elsewhere...|
-    How to save the series:T (Time)
-    Save with lossless compression?:Yes
-
-SaveImages:[module_num:19|svn_version:'Unknown'|variable_revision_number:16|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
-    Select the type of image to save:Image
     Select the image to save:Probabilities
     Select method for constructing file names:From image filename
-    Select image name for file prefix:bac_color_img
+    Select image name for file prefix:phase
     Enter single file name:OrigBlue
     Number of digits:4
     Append a suffix to the image file name?:No
     Text to append to the image name:
     Saved file format:tiff
-    Output file location:Default Input Folder sub-folder|Documents/test/probabilities
+    Output file location:Default Input Folder sub-folder|Desktop/Image-processing-pipelines/CellProfiler_Omnipose Pipelines/Fluorescent_images/CP output/probabilities
     Image bit depth:No conversion
     Overwrite existing files without warning?:No
     When to save:Every cycle
@@ -309,7 +271,7 @@ SaveImages:[module_num:19|svn_version:'Unknown'|variable_revision_number:16|show
     How to save the series:T (Time)
     Save with lossless compression?:No
 
-ExportToSpreadsheet:[module_num:20|svn_version:'Unknown'|variable_revision_number:13|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+ExportToSpreadsheet:[module_num:18|svn_version:'Unknown'|variable_revision_number:13|show_window:False|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
     Select the column delimiter:Comma (",")
     Add image metadata columns to your object data file?:No
     Add image file and folder names to your object data file?:No
@@ -317,7 +279,7 @@ ExportToSpreadsheet:[module_num:20|svn_version:'Unknown'|variable_revision_numbe
     Calculate the per-image mean values for object measurements?:No
     Calculate the per-image median values for object measurements?:No
     Calculate the per-image standard deviation values for object measurements?:No
-    Output file location:Default Input Folder sub-folder|Documents/test
+    Output file location:Default Input Folder sub-folder|Desktop/Image-processing-pipelines/CellProfiler_Omnipose Pipelines/Fluorescent_images/CP output
     Create a GenePattern GCT file?:No
     Select source of sample row name:Metadata
     Select the image to use as the identifier:None
